@@ -1,0 +1,10 @@
+name          'pizzaops-cutover'
+version       '0.1.0'
+source        'git@github.com:pizzaops/pizzaops-cutover.git'
+author        'pizzaops'
+license       'Apache 2.0'
+summary       'Module for migrating agents from one master to another.'
+description   ''
+project_page  'https://github.com/pizzaops/pizzaops-cutover'
+
+dependency 'puppetlabs/stdlib'
