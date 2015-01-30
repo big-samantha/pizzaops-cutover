@@ -1,11 +1,18 @@
 Facter.add('is_pe_infra') do
   confine :osfamily => 'RedHat'
   setcode do
+    puppet_path = Facter.value('puppet_path')
     is_pe_infra = nil
+    ensurevalue = nil
     packages = ['pe-puppetdb','pe-puppet-server','pe-puppet-dashboard-workers','pe-activemq','pe-httpd']
     packages.each do |package|
-      is_pe_infra = system("yum list installed #{package}  &> /dev/null")
-      break if is_pe_infra == true
+      ensurevalue = Facter::Util::Resolution.exec("#{puppet_path} resource package #{package} 2> /dev/null | grep absent")
+      break if ensurevalue.empty? 
+    end
+    if ensurevalue.empty?
+      is_pe_infra = true
+    else
+      is_pe_infra = false
     end
     is_pe_infra
   end
