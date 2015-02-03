@@ -9,10 +9,13 @@ Essentially it does the following:
 * Optionally changes the `server` parameter in `puppet.conf` on the agent.
 * Optionally changes the `caserver` parameter in `puppet.conf` on the agent.`
 * ALWAYS removes the ssldir on the agent.
+* Finally, restarts the puppet agent.
 
 ## Usage
 
 Install this module on the "old" master, e.g. the master you are moving agents *AWAY* from.
+
+Classify the agents you would like to migrate as per the below examples.
 
 ### Minimal use case:
 
@@ -49,6 +52,8 @@ The above will:
 
 ## Additional Details
 
-`manage_server` and `manage_ca_server` both default to false.
+`manage_server` and `manage_ca_server` both default to false. If you classify a node with this class and do not set either of them to true, all it will do is blow away the SSL dir.
 
 Both the `ssldir` and `puppet_conf` parameters have reasonable defaults for both PE and POSS, via logic in params.
+
+If neither `manage_server` nor `manage_ca_server` are set to true, the `cutover::ssldir` class will abort catalog compilation.
