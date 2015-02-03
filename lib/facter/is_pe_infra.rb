@@ -7,9 +7,9 @@ Facter.add('is_pe_infra') do
     packages = ['pe-puppetdb','pe-puppet-server','pe-puppet-dashboard-workers','pe-activemq','pe-httpd']
     packages.each do |package|
       ensurevalue = Facter::Util::Resolution.exec("#{puppet_path} resource package #{package} 2> /dev/null | grep absent")
-      break if ensurevalue.empty? 
+      break if ensurevalue.nil? || ensurevalue.empty? 
     end
-    if ensurevalue.empty?
+    if ensurevalue.nil? || ensurevalue.empty?
       is_pe_infra = true
     else
       is_pe_infra = false
