@@ -1,5 +1,5 @@
 Facter.add('is_pe_infra') do
-  confine :osfamily => 'RedHat'
+  confine :kernel => 'Linux'
   setcode do
     puppet_path = Facter.value('puppet_path')
     is_pe_infra = nil
