@@ -1,60 +1,54 @@
-#### Table of Contents
+# pizzaops-cutover
 
-1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with cutover](#setup)
-    * [What cutover affects](#what-cutover-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with cutover](#beginning-with-cutover)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+This is a puppet module for cutting an agent over from one master/ca infrastructure to another.
 
-## Overview
+It depends on recent versions of `puppetlabs-inifile` and `puppetlabs-stdlib`.
 
-A one-maybe-two sentence summary of what the module does/what problem it solves. This is your 30 second elevator pitch for your module. Consider including OS/Puppet version it works with.       
+Essentially it does the following:
 
-## Module Description
-
-If applicable, this section should have a brief description of the technology the module integrates with and what that integration enables. This section should answer the questions: "What does this module *do*?" and "Why would I use it?"
-
-If your module has a range of functionality (installation, configuration, management, etc.) this is the time to mention it.
-
-## Setup
-
-### What cutover affects
-
-* A list of files, packages, services, or operations that the module will alter, impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form. 
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled, etc.), mention it here. 
-
-### Beginning with cutover
-
-The very basic steps needed for a user to get the module up and running. 
-
-If your most recent release breaks compatibility or requires particular steps for upgrading, you may wish to include an additional section here: Upgrading (For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+* Optionally changes the `server` parameter in `puppet.conf` on the agent.
+* Optionally changes the `caserver` parameter in `puppet.conf` on the agent.`
+* ALWAYS removes the ssldir on the agent.
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing the fancy stuff with your module here. 
+Install this module on the "old" master, e.g. the master you are moving agents *AWAY* from.
 
-## Reference
+### Minimal use case:
 
-Here, list the classes, types, providers, facts, etc contained in your module. This section should include all of the under-the-hood workings of your module so people know what the module is touching on their system but don't need to mess with things. (We are working on automating this section!)
+```puppet
+class { 'cutover':
+  manage_server => true,
+  server        => 'newmaster.puppetlabs.com'
+}
+```
 
-## Limitations
+The above will change the agent's `server` paramter from whatever it currently, to `newmaster.puppetlabs.com`, and then remove the ssldir.
 
-This is where you list OS compatibility, version compatibility, etc.
+### Maximal use case:
 
-## Development
+```puppet
+class { 'cutover':
+  manage_server     => true,
+  server            => 'newmaster.puppetlabs.com',
+  server_section    => 'main'
+  manage_ca_server  => true,
+  ca_server         => 'newcaserver.puppetlabs.com',
+  ca_server_section => 'agent',
+  ssldir            => '/weird/unusual/ssldir/location',
+  puppet_conf       => '/werd/unusual/location/for/puppet.conf',
+}
+```
 
-Since your module is awesome, other users will want to play with it. Let them know what the ground rules for contributing are.
+The above will:
 
-## Release Notes/Contributors/Etc **Optional**
+ * Make the `sever` parameter in the `main` section of `puppet.conf` `newmaster.puppetlabs.com`
+ * Make the `ca_server` parameter of the `agent` section of `puppet.conf` `newcaserver.puppetlabs.com`
+ * Assume the `ssldir` is `/weird/unusual/ssldir/location` and remove it.
+ * Assume that `puppet.conf` is located at `/werd/unusual/location/for/puppet.conf`, and make changes to the values in those files as per the above.
 
-If you aren't using changelog, put your release notes here (though you should consider using changelog). You may also add any additional sections you feel are necessary or important to include here. Please use the `## ` header. 
+## Additional Details
+
+`manage_server` and `manage_ca_server` both default to false.
+
+Both the `ssldir` and `puppet_conf` parameters have reasonable defaults for both PE and POSS, via logic in params.
