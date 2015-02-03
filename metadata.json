@@ -1,6 +1,6 @@
 {
   "name": "pizzaops-cutover",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "author": "pizzaops",
   "summary": "Module for migrating agents from one master to another.",
   "license": "Apache 2.0",
