@@ -56,7 +56,7 @@ Both the `ssldir` and `puppet_conf` parameters have reasonable defaults for both
 
 If neither `manage_server` nor `manage_ca_server` are set to true, the `cutover::ssldir` class will abort catalog compilation, because just blowing away the `ssldir` on its own isn't useful. If you need to do that for whatever reason, it's one file resource.
 
-You will get an error like this one at the end of every run, because once the ssldir is gone the agent cannot submit a report to the original master:
+You will get an error like this one at the end of the run, because once the ssldir is gone the agent cannot submit a report to the original master:
 
 ```
 Error: Could not send report: Error 500 on SERVER: <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
