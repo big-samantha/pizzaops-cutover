@@ -1,19 +1,26 @@
+require 'puppet'
+require 'facter/util/with_puppet'
 Facter.add('is_pe_infra') do
   confine :kernel => 'Linux'
-  setcode do
-    puppet_path = Facter.value('puppet_path')
-    is_pe_infra = nil
-    ensurevalue = nil
-    packages = ['pe-puppetdb','pe-puppet-server','pe-puppet-dashboard-workers','pe-activemq','pe-httpd']
-    packages.each do |package|
-      ensurevalue = Facter::Util::Resolution.exec("#{puppet_path} resource package #{package} 2> /dev/null | grep absent")
-      break if ensurevalue.nil? || ensurevalue.empty? 
+  with_puppet do
+    begin 
+      Module.const_get('Puppet')
+      setcode do
+        packages_pe = ['pe-puppetdb','pe-puppet-server','pe-puppet-dashboard-workers','pe-activemq','pe-httpd']
+        packages_all = Puppet::Type.type(:package).instances.map { |package| package.title }
+        packages_pe_installed = packages_all & packages_pe
+
+        if packages_pe_installed.length == 0
+          false
+        else
+          true
+        end
+      end
+    rescue NameError => e
+      setcode do
+        # We assume true if the fact logic fails becaue if this returns nil when it shouldn't it will be Very Bad(tm) for you.
+        true
+      end
     end
-    if ensurevalue.nil? || ensurevalue.empty?
-      is_pe_infra = true
-    else
-      is_pe_infra = false
-    end
-    is_pe_infra
   end
 end
