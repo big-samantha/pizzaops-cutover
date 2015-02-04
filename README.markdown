@@ -52,11 +52,9 @@ The above will:
 
 ## Additional Details
 
-`manage_server` and `manage_ca_server` both default to false. If you classify a node with this class and do not set either of them to true, all it will do is blow away the SSL dir.
-
 Both the `ssldir` and `puppet_conf` parameters have reasonable defaults for both PE and POSS, via logic in params.
 
-If neither `manage_server` nor `manage_ca_server` are set to true, the `cutover::ssldir` class will abort catalog compilation.
+If neither `manage_server` nor `manage_ca_server` are set to true, the `cutover::ssldir` class will abort catalog compilation, because just blowing away the `ssldir` on its own isn't useful. If you need to do that for whatever reason, it's one file resource.
 
 You will get an error like this one at the end of every run, because once the ssldir is gone the agent cannot submit a report to the original master:
 
