@@ -20,7 +20,9 @@ class cutover (
   validate_bool($manage_server)
   validate_bool($manage_ca_server)
   if ($::is_pe_infra == true) or ($::is_pe_infra == 'true') {
-    notify { 'This module should not be applied to PE infrastructure nodes.': }
+    notify { 'pe-agents-only':
+      message => 'This module should not be applied to PE infrastructure nodes.',
+    }
   }
   else {
     if $manage_server == true { class { 'cutover::server':
