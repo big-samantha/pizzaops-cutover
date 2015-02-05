@@ -1,5 +1,11 @@
 fixtures:
   repositories:
-    stdlib: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+    stdlib: 
+      repo: "https://github.com/puppetlabs/puppetlabs-stdlib.git"
+      ref: '3.0.1'
+    inifile:
+      repo: "https://github.com/puppetlabs/puppetlabs-inifile.git"
+      ref: '1.0.0'
+
   symlinks:
     cutover: "#{source_dir}"
