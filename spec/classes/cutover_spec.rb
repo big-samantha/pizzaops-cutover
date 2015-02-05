@@ -37,5 +37,22 @@ describe 'cutover' do
       it { should contain_class('cutover::server') }
       it { should contain_class('cutover::ssldir') }
     end
+
+    describe 'should inlude cutover::ca_server and cutover::ssldir if manage_ca_server == true' do
+      let(:params) {{
+        :manage_ca_server => true,
+        :ca_server => 'foo.bar.com',
+      }}
+      let(:facts) {{
+        :kernel => 'Linux',
+        :is_pe_infra => false,
+      }}
+
+      it { should compile.with_all_deps }
+      
+      it { should_not contain_notify('pe-agents-only') }
+      it { should contain_class('cutover::ca_server') }
+      it { should contain_class('cutover::ssldir') }
+    end
   end
 end
