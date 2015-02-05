@@ -8,9 +8,6 @@ class cutover::ssldir ( $ssldir ) {
     fail('Cutover module currently doesn\'t support Windows.')
   }
 
-  if ! ($::cutover::manage_server or $::cutover::manage_ca_server) {
-    fail('You are not managing the server or ca_server setting')
-  }
 
   if ! defined(Service['pe-puppet']) {
     service { 'pe-puppet': }

@@ -19,6 +19,9 @@ class cutover (
 ) inherits ::cutover::params {
   validate_bool($manage_server)
   validate_bool($manage_ca_server)
+  if ! ($::cutover::manage_server or $::cutover::manage_ca_server) {
+    fail('You are not managing the server or ca_server setting')
+  }
   if ($::is_pe_infra == true) or ($::is_pe_infra == 'true') {
     notify { 'pe-agents-only':
       message => 'This module should not be applied to PE infrastructure nodes.',
