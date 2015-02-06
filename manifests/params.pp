@@ -1,5 +1,5 @@
 class cutover::params {
-  if ($::is_pe == true) or ($::is_pe == 'true') {
+  if str2bool($::is_pe) {
     $ssldir = '/etc/puppetlabs/puppet/ssl'
     $puppet_conf = '/etc/puppetlabs/puppet/puppet.conf'
   }
