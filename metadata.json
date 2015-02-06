@@ -3,18 +3,66 @@
   "version": "0.3.3",
   "author": "pizzaops",
   "summary": "Module for migrating agents from one master to another.",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "source": "git@github.com:pizzaops/pizzaops-cutover.git",
   "project_page": "https://github.com/pizzaops/pizzaops-cutover",
   "issues_url": "https://github.com/pizzaops/pizzaops-cutover/issues",
+  "operatingsystem_support": [
+      {
+        "operatingsystem": "RedHat",
+        "operatingsystemrelease": [
+          "5",
+          "6",
+          "7"
+        ]
+      },
+      {
+        "operatingsystem": "CentOS",
+        "operatingsystemrelease": [
+          "5",
+          "6",
+          "7"
+        ]
+      },
+      {
+        "operatingsystem": "OracleLinux",
+        "operatingsystemrelease": [
+          "6",
+          "7"
+        ]
+      },
+      {
+        "operatingsystem": "Scientific",
+        "operatingsystemrelease": [
+          "5",
+          "6",
+          "7"
+        ]
+      },
+      {
+        "operatingsystem": "Debian",
+        "operatingsystemrelease": [
+          "6",
+          "7"
+        ]
+      },
+      {
+        "operatingsystem": "Ubuntu",
+        "operatingsystemrelease": [
+          "10.04",
+          "12.04",
+          "14.04"
+        ]
+      }
+    ],
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 3.0.0"
+      "version_requirement": ">= 3.0.0 < 5.0.0"
     },
     {
       "name": "puppetlabs-inifile",
-      "version_requirement": ">= 1.0.0"
+      "version_requirement": ">= 1.0.0 < 2.0.0"
     }
   ]
 }
