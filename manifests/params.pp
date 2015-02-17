@@ -4,7 +4,7 @@ class cutover::params {
     $puppet_conf = '/etc/puppetlabs/puppet/puppet.conf'
   }
   else {
-    $ssldir = '/etc/puppet/ssl'
+    $ssldir = '/var/lib/puppet/ssl'
     $puppet_conf = '/etc/puppet/puppet.conf'
   }
 
