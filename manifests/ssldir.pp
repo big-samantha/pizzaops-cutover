@@ -1,7 +1,5 @@
 class cutover::ssldir ( $ssldir ) {
-  if $caller_module_name != $module_name {
-    fail("Use of private class ${name} by ${caller_module_name}")
-  }
+  cutover::private_warning { 'cutover::ssldir' }
   validate_string($ssldir)
   validate_absolute_path($ssldir)
   if $::osfamily == 'windows' {

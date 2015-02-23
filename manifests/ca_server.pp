@@ -3,6 +3,7 @@ class cutover::ca_server (
   $ca_server,
   $ca_server_section,
 ) {
+  cutover::private_warning { 'cutover::ca_server': }
   validate_string($puppet_conf)
   validate_absolute_path($puppet_conf)
   validate_string($ca_server)
