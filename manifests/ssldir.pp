@@ -1,5 +1,5 @@
 class cutover::ssldir ( $ssldir ) {
-  cutover::private_warning { 'cutover::ssldir' }
+  cutover::private_warning { 'cutover::ssldir': }
   validate_string($ssldir)
   validate_absolute_path($ssldir)
   if $::osfamily == 'windows' {

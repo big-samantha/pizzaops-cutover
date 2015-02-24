@@ -21,7 +21,22 @@ describe 'cutover' do
       it { should_not contain_class('cutover::ssldir') }
     end
 
-    describe 'should inlude cutover::server and cutover::ssldir if manage_server == true' do
+    describe 'should include ::cutover and ::cutover::params' do
+      let(:params) {{
+        :manage_server => true,
+        :server => 'foo.bar.com',
+      }}
+      let(:facts) {{
+        :kernel => 'Linux',
+        :is_pe_infra => false,
+      }}
+      it { should compile.with_all_deps }
+
+      it { should contain_class('cutover') }
+      it { should contain_class('cutover::params') }
+    end
+
+    describe 'should include cutover::server and cutover::ssldir if manage_server == true' do
       let(:params) {{
         :manage_server => true,
         :server => 'foo.bar.com',

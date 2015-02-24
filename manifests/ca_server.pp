@@ -11,9 +11,6 @@ class cutover::ca_server (
   if $::osfamily == 'windows' {
     fail('Cutover module currently doesn\'t support Windows.')
   }
-  if $caller_module_name != $module_name {
-    fail("Use of private class ${name} by ${caller_module_name}")
-  }
   ini_setting { 'ca_server':
     ensure  => present,
     path    => $puppet_conf,
