@@ -61,3 +61,5 @@ You will get an error like this one at the end of the run, because once the ssld
 ```
 Error: Could not send report: Error 500 on SERVER: <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 ```
+
+You may also experience other random resource errors, depending on what order the resources are enforced in, as once the ssldir is removed,  the agent will no longer be able to contact the original master for things like `puppet:///`-style URIs in file resources, etc. You can avoid this by assigning the cutover class to a stage that is enforced after the main stage. For more on stages, see <https://docs.puppetlabs.com/puppet/latest/reference/lang_run_stages.html>.
