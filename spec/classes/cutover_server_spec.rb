@@ -25,19 +25,6 @@ describe 'cutover::server' do
       }
     end
     
-    describe 'should fail if server is Windows' do
-      let(:params) {{
-        :puppet_conf => @puppetconf_location,
-        :server => 'foo.bar.com',
-        :server_section => 'main',
-      }}
-      let(:facts) {{
-        :osfamily => 'windows',
-      }}
-
-      it { should_not compile }
-    end
-
     describe 'should notify if called from external module' do
       let(:params) {{
         :puppet_conf => @puppetconf_location,

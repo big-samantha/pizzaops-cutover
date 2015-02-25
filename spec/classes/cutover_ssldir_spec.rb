@@ -22,16 +22,6 @@ describe 'cutover::ssldir' do
         )
       }
     end
-    describe 'should fail if server is Windows' do
-      let(:params) {{
-        :ssldir => @ssldir_location,
-      }}
-      let(:facts) {{
-        :osfamily => 'Windows',
-      }}
-
-      it { should_not compile }
-    end
 
     describe 'should notify if called from external module' do
       let(:params) {{
