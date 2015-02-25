@@ -1,6 +1,6 @@
 # pizzaops-cutover
 
-This is a puppet module for cutting an agent over from one master/ca infrastructure to another.
+This is a puppet module for cutting an agent over from one master/ca infrastructure to another. It currently supports all operating systems that Puppet Enterprise supports, but should also work with Puppet Open Source.
 
 It depends on recent versions of `puppetlabs-inifile` and `puppetlabs-stdlib`.
 
