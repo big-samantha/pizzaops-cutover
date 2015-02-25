@@ -7,7 +7,7 @@ It depends on recent versions of `puppetlabs-inifile` and `puppetlabs-stdlib`.
 Essentially it does the following:
 
 * Optionally changes the `server` parameter in `puppet.conf` on the agent.
-* Optionally changes the `caserver` parameter in `puppet.conf` on the agent.`
+* Optionally changes the `ca_server` parameter in `puppet.conf` on the agent.
 * ALWAYS removes the ssldir on the agent.
 * Finally, restarts the puppet agent.
 
