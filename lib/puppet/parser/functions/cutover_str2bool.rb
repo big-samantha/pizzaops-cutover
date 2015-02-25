@@ -1,6 +1,10 @@
 #
 # cutover_str2bool.rb
 #
+# Vendored str2bool from latest stdlib, to avoid forcing people to upgrade it.
+# Latest str2bool function accepts bare booleans as input without quotes. This
+# helps in dealing with Facter 1.x vs 2.x differences.
+
 
 module Puppet::Parser::Functions
   newfunction(:cutover_str2bool, :type => :rvalue, :doc => <<-EOS
