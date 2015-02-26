@@ -1,13 +1,13 @@
 {
   "name": "pizzaops-cutover",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "pizzaops",
   "summary": "Module for migrating agents from one master to another.",
   "license": "Apache-2.0",
   "source": "git@github.com:pizzaops/pizzaops-cutover.git",
   "project_page": "https://github.com/pizzaops/pizzaops-cutover",
   "issues_url": "https://github.com/pizzaops/pizzaops-cutover/issues",
-  "tags": ["windows","rhel","centos","debian","ubuntu","scientific","migration","migrate","puppet","server","ca_server","ssl","ssldir","cutover","pizzaops","tools","infrastructure","upgrade"],
+  "tags": ["migration","migrate","puppet","server","ca_server","ssl","ssldir","cutover","pizzaops","tools","infrastructure","upgrade"],
   "operatingsystem_support": [
       {
         "operatingsystem": "RedHat",
