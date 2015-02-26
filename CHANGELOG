@@ -1,3 +1,6 @@
+2015-02-25 Release 1.0.4
+- Updated metadata to reflect support for OSX 10.9
+- Fixed typos in README.md.
 2015-02-25 Release 1.0.3
 - Removed prohibited tags from metadata.json :(
 2015-02-25 Release 1.0.2
