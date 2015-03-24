@@ -4,7 +4,7 @@ Facter.add('is_pe_infra') do
   begin 
     Module.const_get('Puppet')
     setcode do
-      packages_pe = ['pe-puppetdb','pe-puppet-server','pe-puppet-dashboard-workers','pe-activemq','pe-httpd']
+      packages_pe = ['pe-puppetdb','pe-puppetserver','pe-puppet-dashboard-workers','pe-activemq','pe-httpd']
       packages_all = Puppet::Type.type(:package).instances.map { |package| package.title }
       packages_pe_installed = packages_all & packages_pe
 
