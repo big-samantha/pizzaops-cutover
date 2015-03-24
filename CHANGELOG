@@ -1,3 +1,6 @@
+2015-03-24 Release 1.0.5
+- Fix incorrect detection of pe-puppetserver.
+
 2015-02-25 Release 1.0.4
 - Updated metadata to reflect support for OSX 10.9
 - Fixed typos in README.md.
