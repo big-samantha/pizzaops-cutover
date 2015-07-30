@@ -9,3 +9,5 @@ fixtures:
 
   symlinks:
     cutover: "#{source_dir}"
+    
+    test
