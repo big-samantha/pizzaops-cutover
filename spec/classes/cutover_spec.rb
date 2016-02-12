@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe 'cutover' do
   context 'cutover class logic' do
-    describe 'should do nothing but notify if $::is_pe_infra == true' do
+    describe 'should do nothing but notify if $::is_puppet_infra == true' do
       let(:params) {{
         :manage_server => true,
         :server => 'foo.bar.com',
       }}
       let(:facts) {{
         :kernel => 'Linux',
-        :is_pe_infra => true,
+        :is_puppet_infra => true,
       }}
 
       it { should compile.with_all_deps }
@@ -28,7 +28,7 @@ describe 'cutover' do
       }}
       let(:facts) {{
         :kernel => 'Linux',
-        :is_pe_infra => false,
+        :is_puppet_infra => false,
       }}
       it { should compile.with_all_deps }
 
@@ -43,7 +43,7 @@ describe 'cutover' do
       }}
       let(:facts) {{
         :kernel => 'Linux',
-        :is_pe_infra => false,
+        :is_puppet_infra => false,
       }}
 
       it { should compile.with_all_deps }
@@ -60,7 +60,7 @@ describe 'cutover' do
       }}
       let(:facts) {{
         :kernel => 'Linux',
-        :is_pe_infra => false,
+        :is_puppet_infra => false,
       }}
 
       it { should compile.with_all_deps }
@@ -75,7 +75,7 @@ describe 'cutover' do
       }}
       let(:facts) {{
         :kernel => 'Linux',
-        :is_pe_infra => false,
+        :is_puppet_infra => false,
       }}
 
       it { should_not compile }
