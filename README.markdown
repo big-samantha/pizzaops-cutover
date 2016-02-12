@@ -17,12 +17,19 @@ Install this module on the "old" master, e.g. the master you are moving agents *
 
 Classify the agents you would like to migrate as per the below examples.
 
+**Note:** This code must be enforced after all other Puppet code, or you may experience cert issues. My recommendation would be to run this in a [stage](https://docs.puppetlabs.com/puppet/latest/reference/lang_run_stages.html) that runs after all other stages.
+
 ### Minimal use case:
 
 ```puppet
+stage { 'cutover':
+  require => Stage['main'],
+}
+
 class { 'cutover':
   manage_server => true,
-  server        => 'newmaster.puppetlabs.com'
+  server        => 'newmaster.puppetlabs.com',
+  stage         => 'cutover',
 }
 ```
 
@@ -31,6 +38,10 @@ The above will change the agent's `server` paramter from whatever it currently, 
 ### Maximal use case:
 
 ```puppet
+stage { 'cutover':
+  require => Stage['main'],
+}
+
 class { 'cutover':
   manage_server     => true,
   server            => 'newmaster.puppetlabs.com',
@@ -40,6 +51,7 @@ class { 'cutover':
   ca_server_section => 'agent',
   ssldir            => '/weird/unusual/ssldir/location',
   puppet_conf       => '/werd/unusual/location/for/puppet.conf',
+  stage             => 'cutover'
 }
 ```
 
