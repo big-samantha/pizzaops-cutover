@@ -13,9 +13,9 @@ class cutover::ssldir ( $ssldir ) {
     $service_name = 'puppet'
   }
 
-  if ! defined(Service[$service_name]) {
-    service { $service_name: }
-  }
+  ensure_resource( 'service', $service_name, {
+    ensure => running,
+  } )
 
   file { 'ssldir':
     ensure => absent,
