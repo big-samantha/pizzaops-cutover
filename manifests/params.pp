@@ -6,7 +6,7 @@ class cutover::params {
     $ssldir = 'C:/ProgramData/PuppetLabs/puppet/etc/ssl'
     $puppet_conf = 'C:/ProgramData/PuppetLabs/puppet/etc/puppet.conf'
   }
-  elsif cutover_str2bool($::is_pe) {
+  elsif cutover_str2bool($::is_pe) or versioncmp($::puppetversion, '4.0.0') >= 0 {
     $ssldir = '/etc/puppetlabs/puppet/ssl'
     $puppet_conf = '/etc/puppetlabs/puppet/puppet.conf'
   }
